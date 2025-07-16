@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, FileText, CreditCard, DollarSign, TrendingUp, AlertTriangle } from 'lucide-react';
+import { Users, FileText, CreditCard, DollarSign, AlertTriangle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface DashboardStats {
@@ -121,12 +121,12 @@ export function Dashboard() {
         .order('created_at', { ascending: false })
         .limit(5);
 
-      const formattedInvoices: RecentInvoice[] = recentInvoicesData?.map(invoice => ({
+      const formattedInvoices: RecentInvoice[] = recentInvoicesData?.map((invoice: any) => ({
         id: invoice.id,
         invoice_number: invoice.invoice_number,
         total_amount: invoice.total_amount,
         status: invoice.status,
-        customer_name: (invoice.customers as any)?.name || 'Unknown Customer'
+        customer_name: invoice.customers?.name || 'Unknown Customer'
       })) || [];
 
       setRecentInvoices(formattedInvoices);
@@ -144,7 +144,7 @@ export function Dashboard() {
         .order('submission_deadline', { ascending: true })
         .limit(5);
 
-      const formattedAlerts: CashIncentiveAlert[] = incentiveAlertsData?.map(incentive => {
+      const formattedAlerts: CashIncentiveAlert[] = incentiveAlertsData?.map((incentive: any) => {
         const deadline = new Date(incentive.submission_deadline);
         const daysRemaining = Math.ceil((deadline.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
         
@@ -154,7 +154,7 @@ export function Dashboard() {
 
         return {
           id: incentive.id,
-          customer_name: (incentive.customers as any)?.name || 'Unknown Customer',
+          customer_name: incentive.customers?.name || 'Unknown Customer',
           expected_incentive: incentive.expected_incentive,
           days_remaining: daysRemaining,
           alert_level: alertLevel

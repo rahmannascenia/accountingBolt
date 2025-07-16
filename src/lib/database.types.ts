@@ -792,8 +792,8 @@ export interface Database {
           table_name: string;
           record_id: string;
           operation_type: 'CREATE' | 'UPDATE' | 'DELETE' | 'POST' | 'REVERSE';
-          old_values: any;
-          new_values: any;
+          old_values: Record<string, unknown> | null;
+          new_values: Record<string, unknown> | null;
           user_id: string | null;
           user_email: string | null;
           timestamp: string;
@@ -860,8 +860,8 @@ export interface Database {
           p_table_name: string;
           p_record_id: string;
           p_operation_type: string;
-          p_old_values?: any;
-          p_new_values?: any;
+          p_old_values?: Record<string, unknown> | null;
+          p_new_values?: Record<string, unknown> | null;
           p_description?: string;
           p_module?: string;
         };

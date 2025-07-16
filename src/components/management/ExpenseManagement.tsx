@@ -107,7 +107,7 @@ export function ExpenseManagement() {
         bdt_amount: prev.amount,
       }));
     }
-  }, [formData.currency, formData.date]);
+  }, [formData.currency, formData.date, fetchFXRate]);
 
   const loadData = async () => {
     try {

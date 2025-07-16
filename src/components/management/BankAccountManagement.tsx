@@ -150,13 +150,13 @@ export function BankAccountManagement() {
   };
 
   // Group accounts by currency
-  const accountsByCurrency = bankAccounts.reduce((acc, account) => {
+  const accountsByCurrency = bankAccounts.reduce((acc: Record<string, BankAccount[]>, account) => {
     if (!acc[account.currency]) {
       acc[account.currency] = [];
     }
     acc[account.currency].push(account);
     return acc;
-  }, {} as Record<string, BankAccount[]>);
+  }, {});
 
   if (loading) {
     return (

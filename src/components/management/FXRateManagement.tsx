@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, Plus, Edit2, History, AlertCircle, Check, X } from 'lucide-react';
+import { TrendingUp, Plus, Edit2, History, AlertCircle, X } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface FXRate {
@@ -48,7 +48,7 @@ export function FXRateManagement() {
 
   const [affectedRecords, setAffectedRecords] = useState<string[]>([]);
   const [showImpactWarning, setShowImpactWarning] = useState(false);
-  const [pendingRateChange, setPendingRateChange] = useState<any>(null);
+  const [pendingRateChange, setPendingRateChange] = useState<Partial<FXRate> | null>(null);
   useEffect(() => {
     loadData();
   }, []);
@@ -90,7 +90,7 @@ export function FXRateManagement() {
 
   useEffect(() => {
     loadData();
-  }, [filters]);
+  }, [filters, loadData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -243,24 +243,6 @@ export function FXRateManagement() {
     }
   };
 
-  const getLatestRate = async (currency: string, date: string) => {
-    try {
-      const { data } = await supabase
-        .from('fx_rates')
-        .select('*')
-        .eq('from_currency', currency)
-        .eq('to_currency', 'BDT')
-        .lte('date', date)
-        .eq('is_active', true)
-        .order('date', { ascending: false })
-        .limit(1);
-
-      return data?.[0] || null;
-    } catch (error) {
-      console.error('Error fetching latest rate:', error);
-      return null;
-    }
-  };
 
   const copyRate = (rate: FXRate) => {
     setFormData({

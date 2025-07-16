@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart3, Calendar, TrendingUp, TrendingDown, AlertCircle, Download } from 'lucide-react';
+import { BarChart3, Calendar, AlertCircle, Download } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface BalanceSheetAccount {
@@ -11,10 +11,6 @@ interface BalanceSheetAccount {
   currency?: string;
 }
 
-interface FXRateInput {
-  currency: string;
-  rate: number;
-}
 
 interface UnrealizedFXItem {
   account: string;
@@ -41,7 +37,7 @@ export function BalanceSheet() {
 
   useEffect(() => {
     loadBalanceSheet();
-  }, [asOfDate]);
+  }, [asOfDate, loadBalanceSheet]);
 
   const loadBalanceSheet = async () => {
     setLoading(true);

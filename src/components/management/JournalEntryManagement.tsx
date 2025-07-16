@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Plus, Edit2, CheckCircle } from 'lucide-react';
+import { BookOpen, Plus, CheckCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface JournalEntry {
@@ -81,7 +81,7 @@ export function JournalEntryManagement() {
     }
   };
 
-  const updateLine = (index: number, field: string, value: any) => {
+  const updateLine = (index: number, field: string, value: string | number) => {
     const newLines = [...formData.lines];
     newLines[index] = { ...newLines[index], [field]: value };
     setFormData({ ...formData, lines: newLines });

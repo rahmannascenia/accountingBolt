@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CreditCard, Plus, DollarSign, CheckCircle, XCircle, AlertTriangle, Calculator } from 'lucide-react';
+import { CreditCard, Plus, CheckCircle, XCircle, Calculator } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface Payment {
@@ -67,9 +67,7 @@ export function EnhancedPaymentManagement() {
   const [showBadDebtForm, setShowBadDebtForm] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCustomer, setSelectedCustomer] = useState('');
-  const [fxRateInput, setFxRateInput] = useState<FXRate | null>(null);
   const [badDebtAdjustmentAmount, setBadDebtAdjustmentAmount] = useState('');
-  const [showFXRateModal, setShowFXRateModal] = useState(false);
 
   const [formData, setFormData] = useState({
     customer_id: '',

@@ -2,6 +2,10 @@
 
 This is a comprehensive accounting system built with React, TypeScript, and Supabase. It provides a wide range of features for managing customers, invoices, payments, expenses, and more.
 
+## Overview
+
+This project is a full-featured accounting system designed to help businesses manage their finances effectively. It provides a user-friendly interface for managing customers, invoices, payments, expenses, and other financial data. The system is built with a modern tech stack, including React, TypeScript, and Supabase, which ensures that it is fast, reliable, and scalable.
+
 ## Features
 
 - **Customer Management:** Manage customer information, including contact details, billing addresses, and payment terms.
@@ -23,8 +27,9 @@ This is a comprehensive accounting system built with React, TypeScript, and Supa
 
 To get started with the project, you'll need to have the following installed:
 
-- Node.js
-- npm
+- **Git:** You can download and install Git from the official website: [https://git-scm.com/](https://git-scm.com/)
+- **Node.js:** You can download and install Node.js from the official website: [https://nodejs.org/](https://nodejs.org/)
+- **npm:** npm is included with Node.js, so you don't need to install it separately.
 
 You'll also need to create a Supabase project and set up the database schema. You can find the database schema in the `supabase/migrations` directory.
 
@@ -35,9 +40,11 @@ VITE_SUPABASE_URL=YOUR_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
-You can then install the project dependencies and start the development server:
+You can then clone the repository, install the project dependencies, and start the development server:
 
 ```
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 npm install
 npm run dev
 ```

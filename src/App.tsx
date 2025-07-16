@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from './lib/supabase';
+import React, { useState } from 'react';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthPage } from './components/auth/AuthPage';
 import { Dashboard } from './components/dashboard/Dashboard';
