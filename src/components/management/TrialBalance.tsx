@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart3, Calendar, Filter, Eye, FileText } from 'lucide-react';
+import { BarChart3, Calendar, Eye } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface TrialBalanceAccount {
@@ -46,7 +46,7 @@ export function TrialBalance() {
 
   useEffect(() => {
     loadTrialBalance();
-  }, [asOfDate]);
+  }, [asOfDate, loadTrialBalance]);
 
   const loadTrialBalance = async () => {
     setLoading(true);
@@ -189,14 +189,14 @@ export function TrialBalance() {
 
           return {
             id: line.id,
-            date: (line.journal_entries as any).date,
-            description: (line.journal_entries as any).description,
-            reference: (line.journal_entries as any).reference,
+            date: (line.journal_entries as { date: string }).date,
+            description: (line.journal_entries as { description: string }).description,
+            reference: (line.journal_entries as { reference: string | null }).reference,
             debit_amount: debitAmount,
             credit_amount: creditAmount,
             running_balance: runningBalance,
-            source_document_type: (line.journal_entries as any).source_document_type,
-            source_document_id: (line.journal_entries as any).source_document_id,
+            source_document_type: (line.journal_entries as { source_document_type: string | null }).source_document_type,
+            source_document_id: (line.journal_entries as { source_document_id: string | null }).source_document_id,
           };
         });
 

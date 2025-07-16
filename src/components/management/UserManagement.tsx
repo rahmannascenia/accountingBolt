@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Plus, Edit2, Trash2, Shield, UserCheck, UserX, Key } from 'lucide-react';
+import { Users, Plus, Edit2, Trash2, UserCheck, UserX, Key } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface User {
@@ -252,13 +252,13 @@ export function UserManagement() {
     }
   };
 
-  const groupedPermissions = availablePermissions.reduce((groups, permission) => {
+  const groupedPermissions = availablePermissions.reduce((groups: Record<string, Permission[]>, permission) => {
     if (!groups[permission.category]) {
       groups[permission.category] = [];
     }
     groups[permission.category].push(permission);
     return groups;
-  }, {} as Record<string, Permission[]>);
+  }, {});
 
   if (loading) {
     return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Calendar, FileText, AlertCircle, Download } from 'lucide-react';
+import { Users, Calendar, FileText, Download } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface ARBreakdownItem {
@@ -27,7 +27,7 @@ export function AccountsReceivableBreakdown() {
 
   useEffect(() => {
     loadARBreakdown();
-  }, [asOfDate]);
+  }, [asOfDate, loadARBreakdown]);
 
   const loadARBreakdown = async () => {
     setLoading(true);
@@ -98,7 +98,7 @@ export function AccountsReceivableBreakdown() {
 
           arBreakdown.push({
             id: invoice.id,
-            customer_name: (invoice.customers as any)?.name || 'Unknown',
+            customer_name: (invoice.customers as { name: string })?.name || 'Unknown',
             invoice_number: invoice.invoice_number,
             currency: invoice.currency,
             original_amount: remainingAmount,

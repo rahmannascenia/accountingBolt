@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, TrendingUp, FileText, Calculator } from 'lucide-react';
+import { PieChart, TrendingUp, Calculator } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface ReportData {
@@ -12,8 +12,8 @@ interface ReportData {
 }
 
 interface TaxReportData {
-  localInvoices: any[];
-  exportInvoices: any[];
+  localInvoices: Invoice[];
+  exportInvoices: Invoice[];
   totalTDS: number;
   totalVDS: number;
   totalVAT: number;
@@ -43,7 +43,7 @@ export function ReportsManagement() {
     } else if (activeReport === 'tax') {
       loadTaxReport();
     }
-  }, [activeReport, dateRange]);
+  }, [activeReport, dateRange, loadIncomeStatement, loadTaxReport]);
 
   const loadIncomeStatement = async () => {
     setLoading(true);
@@ -72,8 +72,8 @@ export function ReportsManagement() {
       let totalRevenue = 0;
 
       if (invoices) {
-        invoices.forEach(invoice => {
-          const isLocal = (invoice.customers as any)?.customer_type === 'local';
+        invoices.forEach((invoice: any) => {
+          const isLocal = invoice.customers?.customer_type === 'local';
           const category = isLocal ? 'Local Services Revenue' : 'Export Services Revenue';
           revenue[category] = (revenue[category] || 0) + invoice.total_amount;
           totalRevenue += invoice.total_amount;
@@ -123,8 +123,8 @@ export function ReportsManagement() {
         .neq('status', 'cancelled');
 
       if (invoices) {
-        const localInvoices = invoices.filter(inv => (inv.customers as any)?.customer_type === 'local');
-        const exportInvoices = invoices.filter(inv => (inv.customers as any)?.customer_type === 'foreign');
+        const localInvoices = invoices.filter((inv: any) => inv.customers?.customer_type === 'local');
+        const exportInvoices = invoices.filter((inv: any) => inv.customers?.customer_type === 'foreign');
 
         const totalTDS = localInvoices.reduce((sum, inv) => sum + (inv.tds_amount || 0), 0);
         const totalVDS = localInvoices.reduce((sum, inv) => sum + (inv.vds_amount || 0), 0);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Plus, Eye, Filter, Calendar, FileText, AlertCircle } from 'lucide-react';
+import { BookOpen, Plus, Eye } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface JournalEntry {
@@ -54,7 +54,7 @@ export function AutoJournalManagement({ onNavigate }: AutoJournalManagementProps
 
   useEffect(() => {
     loadJournalEntries();
-  }, [filters]);
+  }, [filters, loadJournalEntries]);
 
   const loadJournalEntries = async () => {
     setLoading(true);

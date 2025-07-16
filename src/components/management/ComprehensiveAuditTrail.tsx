@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Search, Filter, Eye, Download, User, Clock } from 'lucide-react';
+import { Shield, Search, Eye, Download, User, Clock } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface AuditEntry {
@@ -47,7 +47,7 @@ export function ComprehensiveAuditTrail() {
   useEffect(() => {
     loadAuditTrail();
     loadUserActivity();
-  }, [filters]);
+  }, [filters, loadAuditTrail, loadUserActivity]);
 
   const loadAuditTrail = async () => {
     try {
@@ -243,16 +243,16 @@ export function ComprehensiveAuditTrail() {
     return tableNames[tableName] || tableName;
   };
 
-  const formatValue = (value: any) => {
+  const formatValue = (value: unknown) => {
     if (value === null || value === undefined) return 'null';
     if (typeof value === 'object') return JSON.stringify(value, null, 2);
     return String(value);
   };
 
-  const getChangedFields = (oldValues: any, newValues: any) => {
+  const getChangedFields = (oldValues: Record<string, unknown>, newValues: Record<string, unknown>) => {
     if (!oldValues || !newValues) return [];
     
-    const changes: Array<{ field: string; oldValue: any; newValue: any }> = [];
+    const changes: Array<{ field: string; oldValue: unknown; newValue: unknown }> = [];
     
     Object.keys(newValues).forEach(key => {
       if (oldValues[key] !== newValues[key]) {

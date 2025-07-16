@@ -65,12 +65,12 @@ export function ChartOfAccountsManagement() {
   });
 
   // Group accounts by type
-  const groupedAccounts = filteredAccounts.reduce((groups, account) => {
+  const groupedAccounts = filteredAccounts.reduce((groups: Record<string, ChartOfAccount[]>, account) => {
     const type = account.account_type;
     if (!groups[type]) groups[type] = [];
     groups[type].push(account);
     return groups;
-  }, {} as Record<string, ChartOfAccount[]>);
+  }, {});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -8,12 +8,10 @@ import {
   Building2, 
   BookOpen, 
   PieChart,
-  Settings,
   LogOut,
   DollarSign,
   TrendingUp,
   Package,
-  Shield,
   Calculator
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Plus, Edit2, Trash2, Send, DollarSign } from 'lucide-react';
+import { FileText, Plus, Trash2, Send } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface Invoice {
@@ -56,7 +56,6 @@ export function InvoiceManagement() {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [services, setServices] = useState<Service[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     customer_id: '',
@@ -82,7 +81,7 @@ export function InvoiceManagement() {
 
   useEffect(() => {
     loadData();
-  }, [filters]);
+  }, [filters, loadData]);
 
   const loadData = async () => {
     try {
@@ -144,7 +143,7 @@ export function InvoiceManagement() {
     return { subtotal, tdsAmount, vdsAmount, vatAmount, totalAmount, netReceivable };
   };
 
-  const handleItemChange = (index: number, field: keyof InvoiceItem, value: any) => {
+  const handleItemChange = (index: number, field: keyof InvoiceItem, value: string | number) => {
     const newItems = [...invoiceItems];
     newItems[index] = { ...newItems[index], [field]: value };
 

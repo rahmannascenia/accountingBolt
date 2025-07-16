@@ -44,7 +44,7 @@ export function EnhancedFXAnalysis() {
 
   useEffect(() => {
     loadFXAnalysis();
-  }, [asOfDate]);
+  }, [asOfDate, loadFXAnalysis]);
 
   const loadFXAnalysis = async () => {
     setLoading(true);
@@ -182,14 +182,14 @@ export function EnhancedFXAnalysis() {
 
     positions.forEach(position => {
       if (position.current_rate === null) {
-        const existing = missingByurrency.get(position.currency) || { count: 0, total: 0 };
+        const existing = missingByCurrency.get(position.currency) || { count: 0, total: 0 };
         existing.count += 1;
         existing.total += position.original_amount;
-        missingByurrency.set(position.currency, existing);
+        missingByCurrency.set(position.currency, existing);
       }
     });
 
-    return Array.from(missingByurrency.entries()).map(([currency, data]) => ({
+    return Array.from(missingByCurrency.entries()).map(([currency, data]) => ({
       currency,
       positions_count: data.count,
       total_amount: data.total,

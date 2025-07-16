@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DollarSign, Clock, CheckCircle, AlertTriangle, Upload, FileText, Calendar, Filter, Shield } from 'lucide-react';
+import { DollarSign, Clock, CheckCircle, AlertTriangle, Upload, FileText, Filter, Shield } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -34,7 +34,7 @@ interface StatusOption {
   value: string;
   label: string;
   color: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className: string }>;
   description: string;
 }
 
@@ -87,11 +87,11 @@ export function ModernCashIncentiveManagement() {
   useEffect(() => {
     loadIncentives();
     loadUserRole();
-  }, []);
+  }, [loadIncentives, loadUserRole]);
 
   useEffect(() => {
     loadIncentives();
-  }, [filters]);
+  }, [filters, loadIncentives]);
 
   const loadUserRole = async () => {
     try {
@@ -148,7 +148,7 @@ export function ModernCashIncentiveManagement() {
     }
   };
 
-  const handleStatusUpdate = async (incentive: CashIncentive, newStatus: string) => {
+  const handleStatusUpdate = async (incentive: CashIncentive, _newStatus: string) => {
     setSelectedIncentive(incentive);
     setActionNotes('');
     setActionDate(new Date().toISOString().split('T')[0]);
@@ -172,7 +172,7 @@ export function ModernCashIncentiveManagement() {
     if (!selectedIncentive) return;
 
     try {
-      const updateData: any = { status: newStatus };
+      const updateData: Partial<CashIncentive> = { status: newStatus as CashIncentive['status'] };
       
       // Set specific fields based on status
       switch (newStatus) {
