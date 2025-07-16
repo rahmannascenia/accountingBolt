@@ -25,31 +25,96 @@ This project is a full-featured accounting system designed to help businesses ma
 
 ## Getting Started
 
-To get started with the project, you'll need to have the following installed:
+This guide will walk you through the process of setting up the project on your local machine.
 
-- **Git:** You can download and install Git from the official website: [https://git-scm.com/](https://git-scm.com/)
-- **Node.js:** You can download and install Node.js from the official website: [https://nodejs.org/](https://nodejs.org/)
-- **npm:** npm is included with Node.js, so you don't need to install it separately.
+### Prerequisites
 
-You'll also need to create a Supabase project and set up the database schema. You can find the database schema in the `supabase/migrations` directory.
+Before you begin, make sure you have the following installed on your system:
 
-Once you've created your Supabase project, you'll need to create a `.env` file in the root of the project and add the following environment variables:
+- **Git:** A version control system for tracking changes in code. You can download it from [https://git-scm.com/](https://git-scm.com/).
+- **Node.js:** A JavaScript runtime environment. You can download it from [https://nodejs.org/](https://nodejs.org/).
+- **npm:** The Node Package Manager, which is included with Node.js.
+
+### 1. Clone the Repository
+
+First, you need to clone the repository to your local machine. Open your terminal and run the following command:
+
+```bash
+git clone https://github.com/rahmannascenia/accountingBolt.git
+```
+
+This will create a new directory called `accountingBolt` with all the project files.
+
+### 2. Navigate to the Project Directory
+
+Next, navigate to the newly created project directory:
+
+```bash
+cd accountingBolt
+```
+
+### 3. Install Dependencies
+
+Now, you need to install all the project dependencies using npm:
+
+```bash
+npm install
+```
+
+This command will download and install all the necessary packages defined in the `package.json` file.
+
+### 4. Set Up Supabase
+
+This project uses Supabase as its backend. You'll need to create a Supabase project and set up the database.
+
+#### a. Create a Supabase Project
+
+If you don't already have a Supabase account, you can create one for free at [https://supabase.com/](https://supabase.com/). Once you've created an account, create a new project.
+
+#### b. Get Your Supabase Credentials
+
+After creating your project, you'll need to get your Supabase URL and anon key. You can find these in your project's settings under the "API" section.
+
+#### c. Create a `.env` File
+
+In the root of the project directory, create a new file called `.env`. This file will store your Supabase credentials. Add the following lines to the `.env` file, replacing `YOUR_SUPABASE_URL` and `YOUR_SUPABASE_ANON_KEY` with your actual credentials:
 
 ```
 VITE_SUPABASE_URL=YOUR_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
-You can then clone the repository, install the project dependencies, and start the development server:
+#### d. Push Database Migrations
 
+This project includes database migrations that define the database schema. To apply these migrations to your Supabase project, you'll need to use the Supabase CLI.
+
+First, install the Supabase CLI by following the instructions in the [official documentation](https://supabase.com/docs/guides/cli).
+
+Once you have the Supabase CLI installed, you'll need to link your local project to your Supabase project. Run the following command and follow the prompts:
+
+```bash
+supabase link --project-ref YOUR_PROJECT_ID
 ```
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
-npm install
+
+You can find your project ID in your Supabase project's settings.
+
+After linking your project, you can push the database migrations to your Supabase project:
+
+```bash
+supabase db push
+```
+
+This command will apply the migrations in the `supabase/migrations` directory to your Supabase database, creating all the necessary tables and columns.
+
+### 5. Start the Development Server
+
+Now that you've set up the project, you can start the development server:
+
+```bash
 npm run dev
 ```
 
-This will start the development server on `http://localhost:5173`.
+This will start the development server on `http://localhost:5173`. You can now open your browser and navigate to this URL to see the application in action.
 
 ## Contributing
 
