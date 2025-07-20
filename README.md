@@ -2,13 +2,77 @@
 
 This is a comprehensive accounting system built with React, TypeScript, and Supabase. It provides a wide range of features for managing customers, invoices, payments, expenses, and more.
 
+![Version](https://img.shields.io/badge/version-0.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [About the Project](#about-the-project)
+- [Demo](#demo)
+- [Technology Stack](#technology-stack)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#1-clone-the-repository)
+  - [Building for Production](#6-building-for-production)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Development Workflow](#development-workflow)
+- [Troubleshooting](#troubleshooting)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/rahmannascenia/accountingBolt.git
+
+# Navigate to the project directory
+cd accountingBolt
+
+# Install dependencies
+npm install
+
+# Create .env file (copy from example)
+cp .env.example .env
+
+# Start development server
+npm run dev
+```
+
 ## About the Project
 
-This Comprehensive Accounting System is a powerful, open-source solution designed to streamline financial management for small and medium-sized businesses. Built with a modern tech stack, this application provides a robust set of features to handle everything from customer and invoice management to complex financial reporting and foreign exchange analysis.
+The Comprehensive Accounting System is a powerful, open-source solution designed to streamline financial management for small and medium-sized businesses. Built with a modern tech stack, this application provides a robust set of features to handle everything from customer and invoice management to complex financial reporting and foreign exchange analysis.
 
 Our goal is to provide a user-friendly and intuitive platform that simplifies the accounting process, allowing business owners and financial professionals to focus on what matters most: growing their business. By leveraging the power of React, TypeScript, and Supabase, we've created a system that is not only fast and reliable but also highly scalable and customizable.
 
 Whether you're a freelancer, a growing startup, or an established business, this Comprehensive Accounting System can be adapted to meet your unique needs. We believe in the power of open-source and encourage contributions from the community to help make this project even better.
+
+## Demo
+
+A live demo of the application is available at: [https://accounting-bolt.example.com](https://accounting-bolt.example.com)
+
+> **Note**: This is a placeholder link. Replace with your actual demo URL when available.
+
+## Technology Stack
+
+- **Frontend**:
+  - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+  - [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+  - [Vite](https://vitejs.dev/) - Next generation frontend tooling
+  - [TailwindCSS](https://tailwindcss.com/) - A utility-first CSS framework
+  - [Lucide React](https://lucide.dev/) - Beautiful and consistent icon set
+
+- **Backend**:
+  - [Supabase](https://supabase.com/) - An open-source Firebase alternative
+  - PostgreSQL - Open-source relational database
+
+- **Testing**:
+  - [Vitest](https://vitest.dev/) - A Vite-native testing framework
+  - [Testing Library](https://testing-library.com/) - Simple and complete testing utilities
 
 ## Features
 
@@ -119,6 +183,86 @@ npm run dev
 ```
 
 This will start the development server on `http://localhost:5173`. You can now open your browser and navigate to this URL to see the application in action.
+
+### 6. Building for Production
+
+When you're ready to deploy the application, you can build it for production:
+
+```bash
+npm run build
+```
+
+This command will create a production-ready build in the `dist` directory.
+
+### 7. Preview the Production Build
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+The project follows a standard React + TypeScript structure:
+
+```
+accountingBolt/
+├── src/                  # Source code
+│   ├── components/       # Reusable UI components
+│   ├── contexts/         # React context providers
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility functions and shared code
+│   ├── App.tsx           # Main application component
+│   └── main.tsx          # Application entry point
+├── supabase/             # Supabase related files
+│   └── migrations/       # Database migrations
+├── public/               # Static assets
+├── .env.example          # Example environment variables
+└── package.json          # Project dependencies and scripts
+```
+
+## Testing
+
+The project uses Vitest for testing. To run the tests:
+
+```bash
+npm run test
+```
+
+## Development Workflow
+
+1. **Create a Branch**: Always create a new branch for your feature or bugfix
+2. **Write Tests**: Write tests for new features or bug fixes
+3. **Implement Changes**: Make your changes to the codebase
+4. **Run Tests**: Ensure all tests pass
+5. **Lint Code**: Run `npm run lint` to check for code style issues
+6. **Submit PR**: Push your changes and submit a pull request
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Supabase Connection Issues**
+   - Ensure your `.env` file contains the correct Supabase credentials
+   - Check if your Supabase project is active
+
+2. **Build Errors**
+   - Make sure all dependencies are installed with `npm install`
+   - Check for TypeScript errors with `tsc --noEmit`
+
+3. **Database Migrations**
+   - If you encounter issues with database migrations, ensure you're using the latest version of the Supabase CLI
+
+## Documentation
+
+For more detailed information about the technologies used in this project, refer to their official documentation:
+
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
 
 ## Contributing
 
