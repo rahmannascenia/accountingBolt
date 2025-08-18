@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Users, FileText, CreditCard, DollarSign, AlertTriangle } from 'lucide-react';
+import { Users, FileText, CreditCard, DollarSign, AlertTriangle, Shield, TrendingUp, Activity } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { useAuth } from '../../hooks/useAuth';
 
 interface DashboardStats {
   totalCustomers: number;
@@ -32,6 +33,7 @@ interface CashIncentiveAlert {
 }
 
 export function Dashboard() {
+  const { userProfile, isAdmin } = useAuth();
   const [stats, setStats] = useState<DashboardStats>({
     totalCustomers: 0,
     localCustomers: 0,
@@ -218,18 +220,45 @@ export function Dashboard() {
     );
   }
 
+  const getDashboardTitle = () => {
+    const role = userProfile?.role || 'user';
+    switch (role) {
+      case 'admin': return 'Admin Dashboard';
+      case 'accountant': return 'Accounting Dashboard';
+      case 'user': return 'User Dashboard';
+      case 'viewer': return 'Financial Overview';
+      default: return 'Dashboard';
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
-        {needsInitialization && (
-          <button
-            onClick={handleInitializeSampleData}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-          >
-            Initialize Sample Data
-          </button>
-        )}
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">{getDashboardTitle()}</h2>
+          <p className="text-gray-600">
+            Welcome back, {userProfile?.full_name || 'User'}! Here's your financial overview.
+          </p>
+        </div>
+        <div className="flex space-x-3">
+          {isAdmin && (
+            <button
+              onClick={() => window.location.href = '#admin-dashboard'}
+              className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+            >
+              <Shield className="h-4 w-4" />
+              <span>Admin View</span>
+            </button>
+          )}
+          {needsInitialization && (
+            <button
+              onClick={handleInitializeSampleData}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Initialize Sample Data
+            </button>
+          )}
+        </div>
       </div>
       
       {/* Key Metrics */}

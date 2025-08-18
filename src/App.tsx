@@ -20,12 +20,14 @@ import { AccountsReceivableBreakdown } from './components/management/AccountsRec
 import { BalanceSheet } from './components/management/BalanceSheet';
 import { AutoJournalManagement } from './components/management/AutoJournalManagement';
 import { UserManagement } from './components/management/UserManagement';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { SystemSettings } from './components/admin/SystemSettings';
 import { Navigation } from './components/layout/Navigation';
 import { Loader } from './components/ui/Loader';
 import { useAuth } from './hooks/useAuth';
 
 function AppContent() {
-  const { user, loading } = useAuth();
+  const { user, userProfile, loading, isAdmin } = useAuth();
   const [currentPage, setCurrentPage] = useState('dashboard');
 
   if (loading) {
@@ -74,6 +76,10 @@ function AppContent() {
         return <BalanceSheet />;
       case 'users':
         return <UserManagement />;
+      case 'admin-dashboard':
+        return isAdmin ? <AdminDashboard /> : <Dashboard />;
+      case 'system-settings':
+        return isAdmin ? <SystemSettings /> : <Dashboard />;
       case 'dashboard':
       default:
         return <Dashboard />;
@@ -82,7 +88,7 @@ function AppContent() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
+      <Navigation currentPage={currentPage} onNavigate={setCurrentPage} userProfile={userProfile} />
       <main className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
           {renderPage()}
