@@ -1,0 +1,32 @@
+name = "accounting-system-d1-hono"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "development"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "accounting-system"
+database_id = "your-d1-database-id"
+
+[build]
+command = "npm run build"
+
+# Development configuration
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+# Production configuration  
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+# Assets for serving the React frontend
+[site]
+bucket = "./dist"
+
+# R2 bucket for file uploads (optional)
+# [[r2_buckets]]
+# binding = "FILES"
+# bucket_name = "accounting-files"
